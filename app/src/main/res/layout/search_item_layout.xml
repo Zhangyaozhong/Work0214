@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/mCv"
+        android:layout_width="191dp"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="#fff"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:cardUseCompatPadding="true"
+        app:contentPadding="@dimen/padding_10">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/iv_icon"
+                android:layout_width="171dp"
+                android:layout_height="122dp"
+                android:layout_marginBottom="@dimen/marginBottom_12"
+                app:actualImageScaleType="focusCrop"
+                app:roundedCornerRadius="8dp" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/iv_icon"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/marginBottom_10"
+                android:ellipsize="end"
+                android:lines="1"
+                android:text="啊刮刮卡两方面考虑是否啊看是否"
+                android:textColor="#666"
+                android:textSize="@dimen/text_size_12" />
+
+            <TextView
+                android:id="@+id/tv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_title"
+                android:text="￥456"
+                android:textStyle="bold"
+                android:textColor="#f00"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_sold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_title"
+                android:layout_alignParentRight="true"
+                android:text="已售48件"
+                android:textColor="#666"
+                android:textSize="10sp" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <View
+        android:layout_width="10dp"
+        android:layout_height="150dp"
+        android:layout_toEndOf="@id/mCv"></View>
+
+    <View
+        android:layout_width="171dp"
+        android:layout_height="10dp"
+        android:layout_below="@id/mCv"></View>
+</RelativeLayout>

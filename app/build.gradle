@@ -1,0 +1,68 @@
+apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao' // apply plugin
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.bwie.android.work0214"
+        minSdkVersion 22
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    //EnvetBus
+    implementation 'org.greenrobot:eventbus:3.1.1'
+    //fresco
+    implementation 'com.facebook.fresco:fresco:1.12.1'
+    // Retrofit库
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    //recyclerview的依赖
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
+    //    XrecycleView
+    implementation 'com.jcodecraeer:xrecyclerview:1.5.9'
+    //CardView
+    implementation 'com.android.support:cardview-v7:28.0.0'
+//    ok拦截器
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.12.1'
+    //黄油刀
+    implementation 'com.jakewharton:butterknife:8.6.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
+    //Green Dao
+    implementation 'org.greenrobot:greendao:3.2.2' // add library
+}
+//版本冲突
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+        if (requested.group == 'com.android.support') {
+            if (!requested.name.startsWith("multidex")) {
+                details.useVersion '28.0.0'    //此处填写你项目使用的sdk版本
+            }
+        }
+    }
+}
+greendao {
+    schemaVersion 1 //数据库版本号
+    daoPackage 'com.bwie.android.work0214.database.greenDao.db'
+// 设置DaoMaster、DaoSession、Dao 包名
+    targetGenDir 'src/main/java'//设置DaoMaster、DaoSession、Dao目录
+//    generateTests false //设置为true以自动生成单元测试。
+//    targetGenDirTests 'src/main/java' //应存储生成的单元测试的基本目录。默认为 src / androidTest / java。
+}
