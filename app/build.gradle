@@ -41,9 +41,15 @@ dependencies {
     implementation 'com.android.support:cardview-v7:28.0.0'
 //    ok拦截器
     implementation 'com.squareup.okhttp3:logging-interceptor:3.12.1'
+
+    //沉浸式状态栏
+    implementation 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+
     //黄油刀
-    implementation 'com.jakewharton:butterknife:8.6.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+//    implementation 'com.jakewharton:butterknife:8.8.1'
+//    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     //Green Dao
     implementation 'org.greenrobot:greendao:3.2.2' // add library
 }

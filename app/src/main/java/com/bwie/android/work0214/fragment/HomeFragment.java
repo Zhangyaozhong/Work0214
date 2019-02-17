@@ -71,11 +71,7 @@ public class HomeFragment extends BaseFragment implements SearchContract.ISearch
     }
 
     private void requestData() {
-////        上来首先判断数据库有没有数据  如果有则直接设置适配器 没有请求网络获取
-//        DaoSession daoSession = GreenDaoUtil.getInstance(getActivity()).getDaoSession();
-//        ListBeanDao listBeanDao = daoSession.getListBeanDao();
-////        查询所有
-//        List<ListBean> listBeans = listBeanDao.loadAll();
+
 //        if (listBeans != null && listBeans.size() > 0) {
 //            setSearchAdapter();
 //        } else {
@@ -161,12 +157,7 @@ public class HomeFragment extends BaseFragment implements SearchContract.ISearch
             dataList.clear();
         }
         dataList.addAll(this.listBeans);
-        if (dataList != null && dataList.size() > 0) {
-            //设置适配器
-            setSearchAdapter();
-            searchAdapter.setItemCallback(this);
-
-        }
+        setSearchAdapter(dataList);
           /*  for (SearchBean.ResultBean resultBean : list) {
                 Toast.makeText(getActivity(), resultBean.commodityName, Toast.LENGTH_SHORT).show();
             }
@@ -175,18 +166,35 @@ public class HomeFragment extends BaseFragment implements SearchContract.ISearch
     }
 
     //设置适配器的方法
-    private void setSearchAdapter() {
-        if (searchAdapter == null) {
-            searchAdapter = new SearchAdapter(getActivity(), dataList);
-            mXRecycleView.setAdapter(searchAdapter);
-        } else {
-            searchAdapter.notifyDataSetChanged();
+    private void setSearchAdapter(List<ListBean> dataList) {
+        if (dataList != null && dataList.size() > 0) {
+            //设置适配器
+            if (searchAdapter == null) {
+                searchAdapter = new SearchAdapter(getActivity(), dataList);
+                mXRecycleView.setAdapter(searchAdapter);
+            } else {
+                searchAdapter.notifyDataSetChanged();
+            }
+            searchAdapter.setItemCallback(this);
+
         }
+
     }
 
     @Override
     public void failure(String msg) {
         Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
+//                上来首先判断数据库有没有数据  如果有则直接设置适配器 没有请求网络获取
+        DaoSession daoSession = GreenDaoUtil.getInstance(getActivity()).getDaoSession();
+        ListBeanDao listBeanDao = daoSession.getListBeanDao();
+//        查询所有
+        List<ListBean> listBeans = listBeanDao.loadAll();
+        setSearchAdapter(listBeans);
+//        if (listBeans != null && listBeans.size() > 0) {
+//            SearchAdapter searchAdapter = new SearchAdapter(getActivity(), listBeans);
+//            mXRecycleView.setAdapter(searchAdapter);
+//        }
+//        new SearchAdapter()
     }
 
     @Override

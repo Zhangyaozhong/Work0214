@@ -7,14 +7,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bwie.android.work0214.R;
 import com.bwie.android.work0214.bean.ListBean;
-import com.bwie.android.work0214.bean.SearchBean;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchViewHolder> {
     private Context context;
@@ -36,11 +38,11 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
     @Override
     public void onBindViewHolder(@NonNull SearchViewHolder holder, final int i) {
         ListBean listBean = list.get(i);
-        holder.price.setText("￥" + listBean.price);
-        holder.title.setText(listBean.commodityName);
-        holder.sold.setText("已售" + listBean.saleNum + "件");
+        holder.tvPrice.setText("￥" + listBean.price);
+        holder.tvTitle.setText(listBean.commodityName);
+        holder.tvSold.setText("已售" + listBean.saleNum + "件");
         Uri uri = Uri.parse(listBean.masterPic);
-        holder.icon.setImageURI(uri);
+        holder.ivIcon.setImageURI(uri);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,15 +61,18 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
     }
 
     public class SearchViewHolder extends RecyclerView.ViewHolder {
-        private ImageView icon;
-        private TextView title, price, sold;
+        @BindView(R.id.iv_icon)
+        SimpleDraweeView ivIcon;
+        @BindView(R.id.tv_title)
+        TextView tvTitle;
+        @BindView(R.id.tv_price)
+        TextView tvPrice;
+        @BindView(R.id.tv_sold)
+        TextView tvSold;
 
         public SearchViewHolder(@NonNull View itemView) {
             super(itemView);
-            icon = itemView.findViewById(R.id.iv_icon);
-            title = itemView.findViewById(R.id.tv_title);
-            price = itemView.findViewById(R.id.tv_price);
-            sold = itemView.findViewById(R.id.tv_sold);
+            ButterKnife.bind(this, itemView);
         }
     }
 
@@ -80,4 +85,5 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
     public void setItemCallback(ItemCallback itemCallback) {
         this.itemCallback = itemCallback;
     }
+
 }
